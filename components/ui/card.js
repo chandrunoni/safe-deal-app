@@ -1,9 +1,7 @@
-import React from "react";
+export function Card(props) {
+  return <div className="card">{props.children}</div>;
+}
 
-export function Card({ children }) {
-  return (
-    <div style={{ border: "1px solid #ccc", padding: "1rem", borderRadius: "8px" }}>
-      {children}
-    </div>
-  );
+export function CardContent(props) {
+  return <div className="card-content">{props.children}</div>;
 }
