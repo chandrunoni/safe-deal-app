@@ -1,0 +1,25 @@
+{
+  "name": "safe-deal-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chandrunoni/safe-deal-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chandrunoni/safe-deal-app/issues"
+  },
+  "homepage": "https://github.com/chandrunoni/safe-deal-app#readme",
+  "description": "",
+  "dependencies": {
+    "next": "^15.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}
