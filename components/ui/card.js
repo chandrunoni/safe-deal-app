@@ -1,11 +1,8 @@
+import React from "react";
+
 export function Card({ children }) {
   return (
-    <div style={{
-      border: "1px solid #ccc",
-      borderRadius: "12px",
-      padding: "20px",
-      boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)"
-    }}>
+    <div style={{ border: "1px solid #ccc", padding: "1rem", borderRadius: "8px" }}>
       {children}
     </div>
   );
