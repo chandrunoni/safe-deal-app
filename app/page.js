@@ -1,5 +1,5 @@
 "use client";
-import { Card, CardContent } from "../components/ui/card";
+import { Card } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -10,6 +10,8 @@ export default function SafeDeals() {
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
   const [otp, setOtp] = useState("");
+  const [dealDetails, setDealDetails] = useState("");
+  const [reference, setReference] = useState("");
 
   const handleSendOTP = () => {
     setOtpSent(true);
@@ -25,25 +27,30 @@ export default function SafeDeals() {
     }
   };
 
+  const handleSubmitDeal = () => {
+    if (dealDetails.trim() === "" || reference.trim() === "") {
+      alert("Please fill in all fields before submitting.");
+      return;
+    }
+    // Here you can send the data to backend/API or just display it for now
+    alert(`Deal Submitted!\nRole: ${role}\nDetails: ${dealDetails}\nReference: ${reference}`);
+    // You can reset the fields after submission if needed
+    setDealDetails("");
+    setReference("");
+    setOtpVerified(false);
+    setOtpSent(false);
+    setOtp("");
+  };
+
   return (
     <div className="grid gap-6 p-6 max-w-xl mx-auto">
       <Card>
-        <CardContent className="grid gap-4 p-6">
+        <div className="grid gap-4 p-6">
           <h2 className="text-xl font-bold text-center">Safe Deal Portal</h2>
 
           <div className="grid grid-cols-2 gap-2">
-            <Button
-              variant={role === "seeker" ? "default" : "outline"}
-              onClick={() => setRole("seeker")}
-            >
-              Seeker
-            </Button>
-            <Button
-              variant={role === "traveller" ? "default" : "outline"}
-              onClick={() => setRole("traveller")}
-            >
-              Traveller
-            </Button>
+            <Button variant={role === "seeker" ? "default" : "outline"} onClick={() => setRole("seeker")}>Seeker</Button>
+            <Button variant={role === "traveller" ? "default" : "outline"} onClick={() => setRole("traveller")}>Traveller</Button>
           </div>
 
           {!otpVerified && (
@@ -55,12 +62,7 @@ export default function SafeDeals() {
               ) : (
                 <>
                   <Label>Enter OTP</Label>
-                  <Input
-                    type="text"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    placeholder="Enter 6-digit OTP"
-                  />
+                  <Input type="text" value={otp} onChange={e => setOtp(e.target.value)} placeholder="Enter 6-digit OTP" />
                   <Button onClick={handleVerifyOTP}>Verify OTP</Button>
                 </>
               )}
@@ -70,13 +72,23 @@ export default function SafeDeals() {
           {otpVerified && (
             <div className="grid gap-3">
               <Label>Deal Details</Label>
-              <Input type="text" placeholder="Item, Amount, Date, Location" />
+              <Input
+                type="text"
+                value={dealDetails}
+                onChange={e => setDealDetails(e.target.value)}
+                placeholder="Item, Amount, Date, Location (e.g. iPhone 13, ₹65,000, 17-June-2025, Chennai)"
+              />
               <Label>Reference ID or Message Screenshot Link</Label>
-              <Input type="text" placeholder="Enter link or ID" />
-              <Button>Submit Safe Deal</Button>
+              <Input
+                type="text"
+                value={reference}
+                onChange={e => setReference(e.target.value)}
+                placeholder="Enter RefID or link to chat screenshot (e.g. Google Drive link)"
+              />
+              <Button onClick={handleSubmitDeal}>Submit Safe Deal</Button>
             </div>
           )}
-        </CardContent>
+        </div>
       </Card>
     </div>
   );
