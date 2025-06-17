@@ -1,29 +1,29 @@
 "use client";
-import { Card } from "../components/ui/card"
-import { Button } from "../components/ui/button"
-import { Input } from "../components/ui/input"
-import { Label } from "../components/ui/label"
-import { useState } from "react"
+import { Card, CardContent } from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { useState } from "react";
 
 export default function SafeDeals() {
-  const [role, setRole] = useState("seeker")
-  const [otpSent, setOtpSent] = useState(false)
-  const [otpVerified, setOtpVerified] = useState(false)
-  const [otp, setOtp] = useState("")
+  const [role, setRole] = useState("seeker");
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
+  const [otp, setOtp] = useState("");
 
   const handleSendOTP = () => {
-    setOtpSent(true)
-    alert("OTP sent to your registered email/mobile.")
-  }
+    setOtpSent(true);
+    alert("OTP sent to your registered email/mobile.");
+  };
 
   const handleVerifyOTP = () => {
     if (otp === "123456") {
-      setOtpVerified(true)
-      alert("OTP verified successfully.")
+      setOtpVerified(true);
+      alert("OTP verified successfully.");
     } else {
-      alert("Invalid OTP. Please try again.")
+      alert("Invalid OTP. Please try again.");
     }
-  }
+  };
 
   return (
     <div className="grid gap-6 p-6 max-w-xl mx-auto">
@@ -32,8 +32,18 @@ export default function SafeDeals() {
           <h2 className="text-xl font-bold text-center">Safe Deal Portal</h2>
 
           <div className="grid grid-cols-2 gap-2">
-            <Button variant={role === "seeker" ? "default" : "outline"} onClick={() => setRole("seeker")}>Seeker</Button>
-            <Button variant={role === "traveller" ? "default" : "outline"} onClick={() => setRole("traveller")}>Traveller</Button>
+            <Button
+              variant={role === "seeker" ? "default" : "outline"}
+              onClick={() => setRole("seeker")}
+            >
+              Seeker
+            </Button>
+            <Button
+              variant={role === "traveller" ? "default" : "outline"}
+              onClick={() => setRole("traveller")}
+            >
+              Traveller
+            </Button>
           </div>
 
           {!otpVerified && (
@@ -45,7 +55,12 @@ export default function SafeDeals() {
               ) : (
                 <>
                   <Label>Enter OTP</Label>
-                  <Input type="text" value={otp} onChange={e => setOtp(e.target.value)} placeholder="Enter 6-digit OTP" />
+                  <Input
+                    type="text"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                    placeholder="Enter 6-digit OTP"
+                  />
                   <Button onClick={handleVerifyOTP}>Verify OTP</Button>
                 </>
               )}
@@ -64,5 +79,5 @@ export default function SafeDeals() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
